@@ -16,15 +16,15 @@ public class GameEnding : MonoBehaviour
     //当たり判定（入った！）
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == player)//入ったゲームオブジェクトがプレイヤーだったら
         {
-            m_IsPlayerAtExit = true;
+            m_IsPlayerAtExit = true;//フェード開始
         }
     }
 
     void Update()
     {
-        if (m_IsPlayerAtExit)
+        if (m_IsPlayerAtExit)//フェード開始
         {
             EndLevel();
         } 
@@ -37,7 +37,7 @@ public class GameEnding : MonoBehaviour
     {
         m_Timer += Time.deltaTime; //タイマーのカウントアップ
 
-        exitBackgroundImageCanvasGroup.alpha = m_Timer / fadeDuration;
+        exitBackgroundImageCanvasGroup.alpha = m_Timer / fadeDuration;//CanvasGround.alfaはUIの透過をスクリプトからまとめて調整
 
         if (m_Timer > fadeDuration + displayImageDuration)//タイマーが持続時間すぎると
         {
