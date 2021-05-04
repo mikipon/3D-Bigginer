@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //horizontal(水平)とvertical（垂直）の値を取得
         float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float vertical 　= Input.GetAxis("Vertical");
 
         //ピタゴラスの定理では一番長い線が1.414であるため
         //斜めのほうが早く移動してしまうため、正規化する
@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
         //浮動小数点を比較し、近似している場合はFalse
         //水平変数がほぼゼロの場合、メソッドはTrueを返す
         bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);//横軸
-        bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);//縦軸
-        bool isWalking = hasHorizontalInput || hasVerticalInput; //hasHorizo​​ntalInputまたはhasVerticalInputがtrueの場合、isWalkingはtrue
+        bool hasVerticalInput   = !Mathf.Approximately(vertical, 0f);//縦軸
+        bool isWalking          = hasHorizontalInput || hasVerticalInput; //hasHorizo​​ntalInputまたはhasVerticalInputがtrueの場合、isWalkingはtrue
 
         //アニメーションをセット
         m_Animator.SetBool("IsWalking", isWalking);

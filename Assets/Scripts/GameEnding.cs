@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameEnding : MonoBehaviour
 {
-    public float fadeDuration = 1f; //fフェードが発生する時間
+    public float fadeDuration         = 1f; //fフェードが発生する時間
     public float displayImageDuration = 1f;
 
     public GameObject player; //参照
@@ -13,7 +13,10 @@ public class GameEnding : MonoBehaviour
     bool m_IsPlayerAtExit; //フェードインを開始するかどうか
     float m_Timer; //タイマー、フェードする前にゲームが終了しないように
 
-    //当たり判定（入った！）
+    /// <summary>
+    /// 当たり判定（入った！）
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == player)//入ったゲームオブジェクトがプレイヤーだったら

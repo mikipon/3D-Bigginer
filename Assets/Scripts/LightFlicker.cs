@@ -18,7 +18,7 @@ public class LightFlicker : MonoBehaviour
     public FlickerMode flickerMode;
     public float lightIntensityMin = 1.25f;
     public float lightIntensityMax = 2.25f;
-    public float flickerDuration = 0.075f;
+    public float flickerDuration   = 0.075f;
     public AnimationCurve intensityCurve;
 
     Material m_FlickeringMaterial;
@@ -29,7 +29,7 @@ public class LightFlicker : MonoBehaviour
     static readonly int k_EmissionColorID = Shader.PropertyToID (k_EmissiveColorName);
     
     const string k_EmissiveColorName = "_EmissionColor";
-    const string k_EmissionName = "_Emission";
+    const string k_EmissionName      = "_Emission";
     const float k_LightIntensityToEmission = 2f / 3f;
 
     void Start()
