@@ -8,8 +8,11 @@ public class PlayerMovement : MonoBehaviour
     public float turnSpeed = 20f;
 
     Animator m_Animator;
+
     Rigidbody m_Rigidbody;
+
     Vector3 m_Movement;//メンバー変数（命令規則）（この変数名のつけ方をパスカルケースと呼ぶ）
+
     Quaternion m_Rotation = Quaternion.identity;//デフォルト
 
     // Start is called before the first frame update
