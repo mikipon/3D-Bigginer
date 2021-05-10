@@ -8,18 +8,17 @@ public class PlayerMovement : MonoBehaviour
     public float turnSpeed = 20f;
 
     Animator m_Animator;
-
     Rigidbody m_Rigidbody;
-
     Vector3 m_Movement;//メンバー変数（命令規則）（この変数名のつけ方をパスカルケースと呼ぶ）
-
     Quaternion m_Rotation = Quaternion.identity;//デフォルト
+    AudioSource m_AudioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_Animator = GetComponent<Animator>();
-        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Animator      = GetComponent<Animator>();
+        m_Rigidbody     = GetComponent<Rigidbody>();
+        m_AudioSource   = GetComponent<AudioSource>();
     }
 
     // 一定秒数ごとによばれる
@@ -42,6 +41,18 @@ public class PlayerMovement : MonoBehaviour
 
         //アニメーションをセット
         m_Animator.SetBool("IsWalking", isWalking);
+
+        if (isWalking) // プレイヤーが歩いている場合
+        {
+            if (!m_AudioSource.isPlaying) // 再生されていない場合
+            {
+                m_AudioSource.Play();
+            }
+        }
+        else // それ以外
+        {
+            m_AudioSource.Stop();
+        }
 
         Vector3 desiredForward = Vector3.RotateTowards(transform.forward, m_Movement, turnSpeed * Time.deltaTime, 0f);
         m_Rotation = Quaternion.LookRotation(desiredForward);

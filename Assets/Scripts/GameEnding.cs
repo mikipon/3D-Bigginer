@@ -9,11 +9,14 @@ public class GameEnding : MonoBehaviour
     public float displayImageDuration = 1f;
     public GameObject player;                            // 参照
     public CanvasGroup exitBackgroundImageCanvasGroup;   // プレイヤーが脱出した場合に表示される画像用
+    public AudioSource exitAudio;
     public CanvasGroup caugthBackgroundImageCanvasGroup; // プレイヤーがキャッチされた場合に表示される新しい画像用
+    public AudioSource caughtAudio;
 
     bool m_IsPlayerAtExit; //出口に到達したかどうか
     bool m_IsPlayerCaught; //キャッチされたかどうか
     float m_Timer;         //タイマー、フェードする前にゲームが終了しないように
+    bool m_HasAudioPlayed;
 
     /// <summary>
     /// 当たり判定（入った！）
@@ -36,11 +39,11 @@ public class GameEnding : MonoBehaviour
     {
         if (m_IsPlayerAtExit) // 出口に到達した場合
         {
-            EndLevel(exitBackgroundImageCanvasGroup, false); // フェードアウト, ゲーム終了
+            EndLevel(exitBackgroundImageCanvasGroup, false, exitAudio); // フェードアウト, ゲーム終了
 
         } else if(m_IsPlayerCaught){ // 捕まった場合
 
-            EndLevel(caugthBackgroundImageCanvasGroup, true); // フェードアウト,再起動可能
+            EndLevel(caugthBackgroundImageCanvasGroup, true, caughtAudio); // フェードアウト,再起動可能
 
         }
     }
@@ -48,8 +51,15 @@ public class GameEnding : MonoBehaviour
     /// <summary>
     /// Canvas Groupをフェードしてから、ゲームを終了する
     /// </summary>
-    void EndLevel(CanvasGroup imageCanvasGroup, bool doRestart)
+    void EndLevel(CanvasGroup imageCanvasGroup, bool doRestart, AudioSource audioSource)
     {
+
+        if (!m_HasAudioPlayed) // 再生されていない場合
+        {
+            audioSource.Play();
+            m_HasAudioPlayed = true;
+        }
+
         m_Timer += Time.deltaTime; // タイマーのカウントアップ
 
         imageCanvasGroup.alpha = m_Timer / fadeDuration; // CanvasGround.alfaはUIの透過をスクリプトからまとめて調整
